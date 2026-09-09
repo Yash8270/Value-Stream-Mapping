@@ -1,0 +1,90 @@
+// Demo VSM data - Fibre-Q style
+// Inventory values are INDEPENDENT - not derived from RFT
+// Process order is preserved from array order (not graph connections)
+export const demoVsm = {
+  id: 'demo-fibreq-001',
+  project: {
+    id: 'demo',
+    name: 'Fibre-Q VSM Demo',
+    product: 'Fibre-Q',
+  },
+  stages: [
+    {
+      id: 'fibre_prep',
+      name: 'Fibre Prep',
+      startingInventory: 35,
+      inventory: 35,
+      processes: [
+        { id: 'fp_1', sequence: 1, name: 'Measure & cut Fibre',  metrics: { ct: 0.49, mt: 0,   ut: 0.46, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'fp_2', sequence: 2, name: 'Strip coating',         metrics: { ct: 0.63, mt: 0,   ut: 0.60, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'fp_3', sequence: 3, name: 'Clean Fibre',           metrics: { ct: 0.45, mt: 0,   ut: 0.42, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'fp_4', sequence: 4, name: 'Visual inspection',     metrics: { ct: 0.91, mt: 0,   ut: 0.88, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'fp_5', sequence: 5, name: 'Apply adhesive',        metrics: { ct: 0.91, mt: 0.5, ut: 0.88, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'fp_6', sequence: 6, name: 'Insert into ferrule',   metrics: { ct: 0.28, mt: 0,   ut: 0.25, st: 0.03, op: 1, scrap: 0,    rft: 1.0  } },
+      ],
+    },
+    {
+      id: 'cell_build',
+      name: 'Cell Build',
+      startingInventory: 28,
+      inventory: 28,
+      processes: [
+        { id: 'cb_1', sequence: 1, name: 'Mount cell on carrier', metrics: { ct: 1.2,  mt: 0,   ut: 1.1,  st: 0.1,  op: 1, scrap: 0,    rft: 1.0  } },
+        { id: 'cb_2', sequence: 2, name: 'Wire bond',              metrics: { ct: 3.5,  mt: 0.5, ut: 3.2,  st: 0.3,  op: 1, scrap: 0.02, rft: 0.98 } },
+      ],
+    },
+    {
+      id: 'collimator_assembly',
+      name: 'Collimator Assembly',
+      startingInventory: 25,
+      inventory: 25,
+      processes: [
+        { id: 'ca_1', sequence: 1, name: 'Lens alignment', metrics: { ct: 2.5, mt: 0,   ut: 2.2,  st: 0.3,  op: 1, scrap: 0, rft: 0.95 } },
+        { id: 'ca_2', sequence: 2, name: 'Epoxy cure',     metrics: { ct: 0.3, mt: 4.0, ut: 0.25, st: 0.05, op: 1, scrap: 0, rft: 1.0  } },
+      ],
+    },
+    {
+      id: 'package_assembly',
+      name: 'Package Assembly',
+      startingInventory: 28,
+      inventory: 28,
+      processes: [
+        { id: 'pa_1', sequence: 1, name: 'Final packaging', metrics: { ct: 1.8, mt: 0, ut: 1.5,  st: 0.3,  op: 2, scrap: 0, rft: 0.98 } },
+        { id: 'pa_2', sequence: 2, name: 'Labelling',        metrics: { ct: 0.5, mt: 0, ut: 0.45, st: 0.05, op: 1, scrap: 0, rft: 1.0  } },
+      ],
+    },
+  ],
+  nodes: [
+    { id: 'supplier',        type: 'processNode',   position: { x: 60,  y: 60  }, data: { label: 'Supplier',                    nodeType: 'supplier'          } },
+    { id: 'customer',        type: 'processNode',   position: { x: 900, y: 60  }, data: { label: 'Customer',                    nodeType: 'customer'          } },
+    { id: 'sales',           type: 'processNode',   position: { x: 700, y: 60  }, data: { label: 'Sales',                       nodeType: 'sales'             } },
+    { id: 'purchasing',      type: 'processNode',   position: { x: 60,  y: 180 }, data: { label: 'Purchasing',                  nodeType: 'purchasing'        } },
+    { id: 'prod_control',    type: 'processNode',   position: { x: 300, y: 180 }, data: { label: 'Production Control',          nodeType: 'production_control' } },
+    { id: 'single_batch',    type: 'processNode',   position: { x: 300, y: 310 }, data: { label: 'Single Batch',                nodeType: 'single_batch'      } },
+    { id: 'fibre_prep',      type: 'processNode',   position: { x: 60,  y: 460 }, data: { label: 'Fibre Prep',                  nodeType: 'process',          stageId: 'fibre_prep',          metrics: { ct: 0.49, mt: 0,   ut: 0.46, st: 0.03, op: 1, scrap: 0,    rft: 1.0  }, isStageBox: true } },
+    { id: 'cell_build',      type: 'processNode',   position: { x: 320, y: 460 }, data: { label: 'Cell Build',                  nodeType: 'assembly',         stageId: 'cell_build',          metrics: { ct: 3.5,  mt: 0.5, ut: 3.2,  st: 0.3,  op: 1, scrap: 0.02, rft: 0.98 }, isStageBox: true } },
+    { id: 'collim_assembly', type: 'processNode',   position: { x: 60,  y: 620 }, data: { label: 'Collimator Assembly',        nodeType: 'assembly',         stageId: 'collimator_assembly', metrics: { ct: 2.5,  mt: 0,   ut: 2.2,  st: 0.3,  op: 1, scrap: 0,    rft: 0.95 }, isStageBox: true } },
+    { id: 'pkg_assembly',    type: 'processNode',   position: { x: 320, y: 620 }, data: { label: 'Package Assembly',           nodeType: 'package_assembly', stageId: 'package_assembly',    metrics: { ct: 1.8,  mt: 0,   ut: 1.5,  st: 0.3,  op: 2, scrap: 0,    rft: 0.98 }, isStageBox: true } },
+    { id: 'alignment',       type: 'processNode',   position: { x: 190, y: 780 }, data: { label: 'Alignment + Sleeving + Lidding', nodeType: 'assembly',      metrics: { ct: 5.0, mt: 0, ut: 4.5, st: 0.5, op: 2, scrap: 0, rft: 0.97 } } },
+    { id: 'fibreq_final',    type: 'processNode',   position: { x: 190, y: 940 }, data: { label: 'Fibre-Q',                    nodeType: 'quality'           } },
+    { id: 'inv_fp',          type: 'inventoryNode', position: { x: 195, y: 440 }, data: { quantity: 35, inventoryType: 'WIP', stageId: 'fibre_prep'   } },
+    { id: 'inv_cb',          type: 'inventoryNode', position: { x: 455, y: 440 }, data: { quantity: 28, inventoryType: 'WIP', stageId: 'cell_build'   } },
+    { id: 'inv_ca',          type: 'inventoryNode', position: { x: 195, y: 600 }, data: { quantity: 25, inventoryType: 'WIP', stageId: 'collimator_assembly'   } },
+    { id: 'inv_pa',          type: 'inventoryNode', position: { x: 455, y: 600 }, data: { quantity: 28, inventoryType: 'WIP', stageId: 'package_assembly'   } },
+  ],
+  connections: [
+    { id: 'e_sup_pur',  source: 'supplier',       target: 'purchasing',      direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_pur_pc',   source: 'purchasing',     target: 'prod_control',    direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_cust_sal', source: 'customer',       target: 'sales',           direction: 'two-way',  type: 'standard', data: { direction: 'two-way'  } },
+    { id: 'e_sal_pc',   source: 'sales',          target: 'prod_control',    direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_pc_sb',    source: 'prod_control',   target: 'single_batch',    direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_sb_fp',    source: 'single_batch',   target: 'fibre_prep',      direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_sb_cb',    source: 'single_batch',   target: 'cell_build',      direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_fp_ca',    source: 'fibre_prep',     target: 'collim_assembly', direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_cb_pa',    source: 'cell_build',     target: 'pkg_assembly',    direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_ca_aln',   source: 'collim_assembly',target: 'alignment',       direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_pa_aln',   source: 'pkg_assembly',   target: 'alignment',       direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+    { id: 'e_aln_fq',   source: 'alignment',      target: 'fibreq_final',    direction: 'forward',  type: 'standard', data: { direction: 'forward'  } },
+  ],
+  metadata: { version: '1.0', description: 'Fibre-Q demo VSM.' },
+};

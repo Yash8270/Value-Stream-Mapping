@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --vsm-navy: #16324F;
+  --vsm-navy-deep: #0F2538;
+  --vsm-blue: #2F6FAD;
+  --vsm-process: #16A9D8;
+  --vsm-assembly: #4B72B5;
+  --vsm-quality: #F5B700;
+  --vsm-package: #8A6900;
+  --vsm-inventory: #5B9BD5;
+  --background: #F4F7FB;
+  --canvas: #FFFFFF;
+  --text: #17202A;
+  --secondary-text: #64748B;
+  --border: #D6DEE8;
+  --border-light: #E2E8F0;
+  --hover-bg: #EAF2FA;
+  --success: #2E7D32;
+  --error: #D32F2F;
+  --warning: #ED9B00;
+  
+  --shadow-xs: 0 1px 3px rgba(15, 35, 55, 0.05);
+  --shadow-sm: 0 2px 8px rgba(15, 35, 55, 0.07);
+  --shadow-md: 0 6px 18px rgba(15, 35, 55, 0.09);
+  --shadow-lg: 0 14px 34px rgba(15, 35, 55, 0.13);
+  --shadow-glow: 0 0 16px rgba(22, 169, 216, 0.35);
+  
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  --transition-fast: 140ms ease;
+  --transition-normal: 200ms ease;
+  --transition-smooth: 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  transition: all var(--transition-normal);
+}
+
+button:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 7px 11px;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--vsm-blue);
+  box-shadow: 0 0 0 3px rgba(47, 111, 173, 0.16);
+  background-color: #FFFFFF;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* React Flow Overrides for Engineering Canvas */
+.vsm-canvas-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #F8FAFC;
+  background-image: radial-gradient(circle, #CBD5E1 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+.react-flow__handle {
+  width: 9px !important;
+  height: 9px !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--vsm-blue) !important;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease !important;
+}
+
+.react-flow__handle:hover {
+  background: var(--vsm-blue) !important;
+  transform: scale(1.45) !important;
+  box-shadow: 0 0 6px rgba(47, 111, 173, 0.5) !important;
+}
+
+.react-flow__controls {
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  background: #FFFFFF !important;
+  padding: 3px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.react-flow__controls-button {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--vsm-navy) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--hover-bg) !important;
+  color: var(--vsm-blue) !important;
+  transform: scale(1.05) !important;
+}
+
+.react-flow__minimap {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-md) !important;
+  background: #FFFFFF !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.react-flow__minimap:hover {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* ========================================================
+   MODERN UI & MICRO-ANIMATION SUITE
+   ======================================================== */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.96) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(22, 169, 216, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(22, 169, 216, 0);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes progressShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes indeterminateLine {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes indeterminateLineShort {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+/* Reusable Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 180ms ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-modal-scale {
+  animation: modalScale 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.spinning-icon {
+  animation: spin 0.9s linear infinite;
+}
+
+.pulse-dot-amber {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #F59E0B;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.7);
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+
+.pulse-dot-green {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.float-icon {
+  animation: floatSlow 3.2s ease-in-out infinite;
+}
+
+/* Skeleton Loading Shimmer Elements */
+.skeleton-box {
+  background: linear-gradient(90deg, #EDF2F7 25%, #F7FAFC 37%, #EDF2F7 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.5s ease infinite;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  pointer-events: none;
+}
+
+/* Interactive Card Hover Elevate */
+.hover-card {
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth) !important;
+}
+
+.hover-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: var(--vsm-blue) !important;
+}
+
+/* Glassmorphic Top Loading Bar */
+.top-loading-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  z-index: 9999;
+  background: rgba(22, 50, 79, 0.08);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.top-loading-bar-indeterminate {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--vsm-process), #3B82F6, #10B981);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(22, 169, 216, 0.8), 0 0 5px rgba(16, 185, 129, 0.6);
+  animation: indeterminateLine 2s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.top-loading-bar-indeterminate-secondary {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--vsm-process), #3B82F6, #10B981);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(22, 169, 216, 0.6);
+  animation: indeterminateLineShort 2s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation-delay: 1.15s;
+}
+
+/* Animated Progress Bar Fill */
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--vsm-process) 0%, var(--vsm-blue) 50%, #10B981 100%);
+  background-size: 200% 100%;
+  animation: progressShift 2s ease infinite;
+  box-shadow: 0 0 12px rgba(22, 169, 216, 0.5);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}

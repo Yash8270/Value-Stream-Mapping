@@ -1,0 +1,102 @@
+.node {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  min-width: 160px;
+  font-size: 12px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.node:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.node.selected {
+  border: 2px solid var(--process-blue);
+  box-shadow: var(--shadow-lg), var(--focus-ring);
+}
+
+.header {
+  padding: 10px 12px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+
+.header.process {
+  background: var(--process-gradient);
+}
+
+.header.assembly {
+  background: var(--assembly-gradient);
+}
+
+.header.quality {
+  background: var(--quality-gradient);
+  color: white;
+}
+
+.header.package_assembly {
+  background: var(--package-gradient);
+}
+
+.header.supplier, .header.customer {
+  background: var(--nav-gradient);
+}
+
+.header.sales, .header.purchasing, .header.production_control, .header.single_batch {
+  background: linear-gradient(135deg, var(--secondary-blue) 0%, #1E4D7B 100%);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 11px;
+  background-color: var(--surface);
+}
+
+.metricRow {
+  display: flex;
+  border-bottom: 1px solid var(--background);
+  border-right: 1px solid var(--background);
+}
+.metricRow:nth-child(even) {
+  border-right: none;
+}
+.metricRow:nth-last-child(1), .metricRow:nth-last-child(2) {
+  border-bottom: none;
+}
+
+.metricLabel {
+  padding: 6px 8px;
+  color: var(--text-secondary);
+  background-color: var(--background);
+  flex: 0 0 35px;
+  font-weight: 500;
+}
+
+.metricValue {
+  padding: 6px 8px;
+  font-weight: 600;
+  flex: 1;
+  text-align: right;
+  color: var(--text-main);
+}
+
+.handle {
+  width: 10px;
+  height: 10px;
+  background-color: var(--surface);
+  border: 2px solid var(--process-blue);
+  transition: all 0.2s;
+}
+.handle:hover {
+  transform: scale(1.3);
+  background-color: var(--process-blue);
+}

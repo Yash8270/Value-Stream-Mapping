@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--canvas-bg);
+}
+
+.workspace {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 56px); /* minus TopNav height */
+  position: relative;
+}
+
+.mainArea {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.canvasWrapper {
+  flex: 1;
+  position: relative;
+  background-color: transparent;
+  /* Add a very subtle inner shadow to the canvas area */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+}

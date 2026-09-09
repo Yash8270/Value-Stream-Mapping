@@ -1,0 +1,70 @@
+.panel {
+  width: 320px;
+  background-color: var(--surface);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.02);
+  z-index: 10;
+}
+
+.emptyState {
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--background);
+  color: var(--primary-navy);
+}
+
+.section {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: var(--background);
+  transition: all 0.2s;
+}
+.input:hover {
+  border-color: #94A3B8;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--process-blue);
+  background-color: var(--surface);
+  box-shadow: var(--focus-ring);
+}

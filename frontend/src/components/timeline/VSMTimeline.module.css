@@ -1,0 +1,14 @@
+.container {
+  height: 220px;
+  width: 100%;
+  background-color: var(--surface);
+  border-top: 1px solid var(--border-color);
+  padding: 24px 32px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+  z-index: 20;
+  position: relative;
+}
