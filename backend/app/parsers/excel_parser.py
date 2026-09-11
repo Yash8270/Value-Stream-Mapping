@@ -101,13 +101,16 @@ class ExcelVSMParser:
                         }
 
                     # Scan remaining cells in this stage header row for explicit stage inventory numbers
-                    for cell_val in row[1:]:
-                        val_flt = safe_float(cell_val)
-                        if val_flt is not None and val_flt >= 0:
-                            if stages_dict[current_stage]["starting_inventory"] is None:
-                                stages_dict[current_stage]["starting_inventory"] = val_flt
-                                stages_dict[current_stage]["inventory"] = val_flt
-                                has_explicit_inventory = True
+                    # Only apply if this row does not have a process name in Column C
+                    col_c_peek = row[2] if len(row) > 2 else None
+                    if col_c_peek is None or not str(col_c_peek).strip() or str(col_c_peek).strip().lower() in ['process', 'process name', 'step', 'name', 'nan']:
+                        for cell_val in row[1:]:
+                            val_flt = safe_float(cell_val)
+                            if val_flt is not None and val_flt > 0:
+                                if stages_dict[current_stage]["starting_inventory"] is None:
+                                    stages_dict[current_stage]["starting_inventory"] = val_flt
+                                    stages_dict[current_stage]["inventory"] = val_flt
+                                    has_explicit_inventory = True
 
                 if not current_stage:
                     continue
@@ -269,6 +272,9 @@ class ExcelVSMParser:
                         )
 
             # 3. Post-scan checks across generated stages & processes
+            # Exclude any stage headers/labels that do not have any process steps
+            stages_dict = {k: s for k, s in stages_dict.items() if len(s.get('processes', [])) > 0}
+
             total_processes = sum(len(s['processes']) for s in stages_dict.values())
             if total_processes > 0:
                 has_explicit_process_data = True
@@ -478,6 +484,8 @@ class JSONVSMParser:
                     error=error_detail
                 )
 
+            if "id" not in data or not data["id"]:
+                data["id"] = str(uuid.uuid4())
             return ImportResult(
                 success=True,
                 vsm=VSMModel(**data)
