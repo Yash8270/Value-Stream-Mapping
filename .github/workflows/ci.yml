@@ -1,0 +1,23 @@
+name: VSM CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build backend Docker image
+        run: docker build -t vsm-backend -f backend/Dockerfile .
+
+      - name: Build frontend Docker image
+        run: docker build -t vsm-frontend -f frontend/Dockerfile frontend
